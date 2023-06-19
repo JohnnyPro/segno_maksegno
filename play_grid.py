@@ -17,6 +17,7 @@ class PlayGrid:
                       "Thursday": [0, 0, 1],
                       "Friday": [0, 0, 0],
                       "Saturday": [0, 0, 1],
+                      "Home": [425, 590]
                       }
 
     def draw_one_legged(self, y, x=350, width=200, height=70):
@@ -33,19 +34,22 @@ class PlayGrid:
     def draw_playgrid(self):
         current = self.start
         for tile in self.tiles:
-            if self.tiles[tile][2] == 1:
-                self.draw_two_legged(
-                    y=current[1], x=current[0], width=self.width, height=self.height)
-                self.tiles[tile] = [current[1], current[1] + self.height, 1]
-                current[1] -= self.height
+            if tile != "Home":
+                if self.tiles[tile][2] == 1:
+                    self.draw_two_legged(
+                        y=current[1], x=current[0], width=self.width, height=self.height)
+                    self.tiles[tile] = [current[1],
+                                        current[1] + self.height, 1]
+                    current[1] -= self.height
 
-            else:
-                self.draw_one_legged(
-                    y=current[1], x=current[0], width=self.width, height=self.height)
-                self.tiles[tile] = [current[1], current[1] + self.height, 0]
-                current[1] -= self.height
+                else:
+                    self.draw_one_legged(
+                        y=current[1], x=current[0], width=self.width, height=self.height)
+                    self.tiles[tile] = [current[1],
+                                        current[1] + self.height, 0]
+                    current[1] -= self.height
 
-        self.start = [350, 500]
+            self.start = [350, 500]
 
     def grid_stamped(self, posBox):
         for tile in self.tiles:
@@ -54,5 +58,6 @@ class PlayGrid:
             if ((tilePos[0] > posBox[0] and tilePos[0] < posBox[1]) or (tilePos[1] > posBox[0] and tilePos[1] < posBox[1])):
                 print(
                     f'{posBox[0]} {tilePos[0]}      {posBox[1]} {tilePos[1]}')
-                return True
+                # return True
+                return False
         return False

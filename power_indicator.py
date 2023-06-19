@@ -20,6 +20,8 @@ class PowerIndicator:
         self.isUp = True
         self.isInMotion = True
 
+        self.default_speed = speed
+
     def _set_points(self, x, y):
         return [(x, y), (x - self.width, y +
                          self.height / 2), (x - self.width, y - self.height / 2)]
@@ -67,3 +69,32 @@ class PowerIndicator:
                 self.y += self.speed
 
             self.points = self._set_points(self.x, self.y)
+
+    def set_speed(self, target, reverse_trip=False):
+        """
+        set speed based on the next target. should be faster as we 
+        approach sunday
+
+        ignore this, unused
+        """
+
+        targets = ["Monday", "Tuesday", "Wednesday",
+                   "Thursday", "Friday", "Saturday", "Sunday"]
+        multiplier = 1
+        if reverse_trip:
+            targets = targets.reverse()
+            multiplier = 2
+
+        self.speed = 4 + multiplier*(0.5*targets.index(target))
+
+    def increase_speed(self):
+        """
+        increase indicator speed by 0.5 on successful turn
+        """
+        self.speed += 0.5
+
+    def reset_speed(self):
+        """
+        reset to default speed on failed turn
+        """
+        self.speed = self.default_speed

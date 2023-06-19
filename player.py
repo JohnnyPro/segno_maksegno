@@ -78,9 +78,9 @@ class Player:
         finalPos = self.current_position[1] + changeNeeded * power
         # print(f"FinalPos : {finalPos}")
 
-        # if self.lastLap:
-        #     self.current_position[1] = finalPos + \
-        #         (self.height / 2) * (changeNeeded / changeNeeded)
+        if self.lastLap:
+            self.current_position[1] = finalPos + \
+                (self.height / 2) * (changeNeeded / changeNeeded)
 
         self.current_position[1] = finalPos - \
             (self.height / 2) * (changeNeeded / changeNeeded)
@@ -95,6 +95,7 @@ class Player:
 
     def selectNextTarget(self):
         nextTargets = {
+            "Home": "Monday",
             "Monday": "Tuesday",
             "Tuesday": "Wednesday",
             "Wednesday": "Thursday",
@@ -107,7 +108,8 @@ class Player:
             "Friday": "Thursday",
             "Thursday": "Wednesday",
             "Wednesday": "Tuesday",
-            "Tuesday": "Monday"
+            "Tuesday": "Monday",
+            "Monday": "Home"
         }
 
         if not self.lastLap:

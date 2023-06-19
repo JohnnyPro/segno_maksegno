@@ -44,7 +44,6 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[K_SPACE]:
-            # print(f'Button PRESSEEEEEEEEEEEEEEEEEEEEED {button_pressed}')
             pygame.time.wait(400)
             if button_pressed:
                 continue
@@ -78,6 +77,8 @@ def main():
                 posBox=(playerTopY, playerTopY + player.height))
             print(f'isStamped {isStamped}')
             if isStamped:
+                power_indicator.reset_speed()
+
                 player.isTurn = False
                 player.return_to_side_line()
                 index = players.index(player)
@@ -92,6 +93,7 @@ def main():
                     player.take_turn()
                     player.isTurn = True
             else:
+                power_indicator.increase_speed()
                 player.selectNextTarget()
                 print(player.nextTarget)
 
