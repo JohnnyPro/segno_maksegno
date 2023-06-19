@@ -50,6 +50,9 @@ class PlayGrid:
     def grid_stamped(self, posBox):
         for tile in self.tiles:
             tilePos = self.tiles[tile]
-            if posBox[0] <= tilePos[0] and posBox[1] >= tilePos[1]:
-                return False
+            # if posBox[0] < tilePos[0] and posBox[1] > tilePos[1]:
+            if ((tilePos[0] > posBox[0] and tilePos[0] < posBox[1]) or (tilePos[1] > posBox[0] and tilePos[1] < posBox[1])):
+                print(
+                    f'{posBox[0]} {tilePos[0]}      {posBox[1]} {tilePos[1]}')
+                return True
         return False

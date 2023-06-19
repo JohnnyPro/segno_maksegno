@@ -76,16 +76,18 @@ def main():
             playerTopY = player.jump(power=accuracy, goal=goalPos)
             isStamped = play_grid.grid_stamped(
                 posBox=(playerTopY, playerTopY + player.height))
-            print(isStamped)
+            print(f'isStamped {isStamped}')
             if isStamped:
                 player.isTurn = False
                 player.return_to_side_line()
                 index = players.index(player)
                 try:
-                    player = players[index + 1]
+                    player = players[(index + 1) % 2]
                     player.take_turn()
                     player.isTurn = True
+                    currentTurn = (currentTurn + 1) % 2
                 except Exception as e:
+                    print(e)
                     player = players[0]
                     player.take_turn()
                     player.isTurn = True

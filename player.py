@@ -23,9 +23,14 @@ class Player:
         self.current_position = [225, 490]
         self.isTurn = False
 
+    def __repr__(self):
+        print(self.name)
+
     def take_turn(self):
         self.current_position = [425, 590]
         self.isTurn = True
+
+        self.nextTarget = "Monday"
 
     def key_handler(self, keys):
         speed = 10
@@ -72,9 +77,10 @@ class Player:
         # print(f"Change Needed : {changeNeeded}")
         finalPos = self.current_position[1] + changeNeeded * power
         # print(f"FinalPos : {finalPos}")
-        if self.lastLap:
-            self.current_position[1] = finalPos + \
-                (self.height / 2) * (changeNeeded / changeNeeded)
+
+        # if self.lastLap:
+        #     self.current_position[1] = finalPos + \
+        #         (self.height / 2) * (changeNeeded / changeNeeded)
 
         self.current_position[1] = finalPos - \
             (self.height / 2) * (changeNeeded / changeNeeded)
